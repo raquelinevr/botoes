@@ -1,0 +1,94 @@
+package com.example.barradeapps
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.barradeapps.ui.theme.BarraDeAppsTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            BarraDeAppsTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    ButtonExamples(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ButtonExamples(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FilledButtonExample {  }
+        Spacer(modifier = Modifier.height(8.dp))
+        FilledTonalButtonExample {  }
+        Spacer(modifier = Modifier.height(8.dp))
+        OutlinedButtonExample {  }
+        Spacer(modifier = Modifier.height(8.dp))
+        ElevatedButtonExample {  }
+        Spacer(modifier = Modifier.height(8.dp))
+        TextButtonExample {  }
+    }
+}
+
+@Composable
+fun FilledButtonExample(onClick: () -> Unit) {
+    Button(onClick = { onClick() }, colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)) {
+        Text("Filled")
+    }
+}
+
+@Composable
+fun FilledTonalButtonExample(onClick: () -> Unit) {
+    FilledTonalButton(onClick = { onClick() }, colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary)) {
+        Text("Tonal")
+    }
+}
+
+@Composable
+fun OutlinedButtonExample(onClick: () -> Unit) {
+    OutlinedButton(onClick = { onClick() }, colors = ButtonDefaults.outlinedButtonColors(containerColor = MaterialTheme.colorScheme.surface)) {
+        Text("Outlined")
+    }
+}
+
+@Composable
+fun ElevatedButtonExample(onClick: () -> Unit) {
+    ElevatedButton(onClick = { onClick() }, colors = ButtonDefaults.elevatedButtonColors(containerColor = MaterialTheme.colorScheme.tertiary)) {
+        Text("Elevated")
+    }
+}
+
+@Composable
+fun TextButtonExample(onClick: () -> Unit) {
+    TextButton(onClick = { onClick() }, colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onSurface)) {
+        Text("Text Button")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ButtonExamplesPreview() {
+    BarraDeAppsTheme {
+        ButtonExamples()
+    }
+}
